@@ -35,7 +35,8 @@
     <input type="date" />
     <table id="tasksTable"></table>
     <p>
-        <input id="taskDescription" type="text" /><button onclick="addTask()">Legg til oppgave</button>
+        <input id="taskDescription" type="text" placeholder="Oppgave" /><input id="taskPerson" type="text" placeholder="Navn" />
+        <button onclick="addTask()">Legg til oppgave</button>
     </p>
     <script>
         // Model
@@ -46,11 +47,13 @@
         ];
 
         // Controller
-        var taskDescriptionInput = document.getElementById('taskDescription');
+        let taskDescriptionInput = document.getElementById('taskDescription');
+        let taskPersonInput = document.getElementById('taskPerson');
 
         function addTask() {
             tasks.push({
                 description: taskDescriptionInput.value,
+                person: taskPersonInput.value,
                 isDone: false
             });
             taskDescriptionInput.value = '';
