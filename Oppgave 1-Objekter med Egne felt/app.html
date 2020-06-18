@@ -35,28 +35,37 @@
     <input type="date" />
     <table id="tasksTable"></table>
     <p>
-        <input id="taskDescription" type="text" placeholder="Oppgave" /><input id="taskPerson" type="text" placeholder="Navn" />
+        <input id="taskDescription" type="text" placeholder="Oppgave" />
+        <input id="taskPerson" type="text" placeholder="Navn" />
+        <input id="taskDeadline" type="date" myDate.toISOString().substr(0,10) />
         <button onclick="addTask()">Legg til oppgave</button>
     </p>
     <script>
         // Model
         var tasks = [
-            { description: 'Handle til middag', person: 'Erik', isDone: true },
-            { description: 'Lage middag', person: 'Lisa', isDone: false },
-            { description: 'Spise middag', person: 'Erik', isDone: false },
+            { description: 'Handle til middag', person: 'Erik', deadline: '6/18/2020', deadlineDone: '6/18/2020', isDone: true },
+            { description: 'Lage middag', person: 'Lisa', deadline: '6/18/2020', deadlineDone: '', isDone: false },
+            { description: 'Spise middag', person: 'Erik og Lisa', deadline: '6/18/2020', deadlineDone: '', isDone: false },
         ];
 
         // Controller
         let taskDescriptionInput = document.getElementById('taskDescription');
         let taskPersonInput = document.getElementById('taskPerson');
+        let taskDeadlineInput = document.getElementById('taskDeadline')
 
         function addTask() {
+        let date = new Date(taskDeadlineInput.value);
+        let dateConverted = date.toLocaleDateString();
             tasks.push({
                 description: taskDescriptionInput.value,
                 person: taskPersonInput.value,
+                deadline: dateConverted,
+                deadlineDone: '',
                 isDone: false
             });
             taskDescriptionInput.value = '';
+            taskPersonInput.value = '';
+            taskDeadlineInput.value = '';
             show();
         }
 
@@ -69,8 +78,10 @@
                             <tr>
                                 <th>Oppgave</th>
                                 <th>Hvem</th>
+                                <th>Frist</th>
                                 <th>Gjort</th>
                                 <th></th>
+                                <th>Ferdig</th>
                             </tr>`;
             for (let i = 0; i < tasks.length; i++) {
                 html += createHtmlRow(i);
@@ -85,26 +96,33 @@
                 return `<tr>
                                 <td>${task.description}</td>
                                 <td>${task.person}</td>
+                                <td>${task.deadline}</td>
                                 <td><input onchange="changeIsDone(this, ${i})" type="checkbox" ${checkedHtml} /></td>
                                 <td>
                                     <button onclick="deleteTask(${i})">Slett</button>
                                     <button onclick="editTask(${i})">Rediger</button>
                                 </td>
+                                <td>${task.deadlineDone}</td>
                             </tr>
                             `;
             return `<tr>
                                 <td><input id="editDescription${i}" type="text" value="${task.description}"/></td>
                                 <td><input id="editPerson${i}" type="text" value="${task.person}"/></td>
+                                <td><input id="editDeadline${i}" type="date" value="${task.deadline}"/></td>
                                 <td><input onchange="changeIsDone(this, ${i})" type="checkbox" ${checkedHtml} /></td>
                                 <td>
                                     <button onclick="updateTask(${i})">Lagre</button>
                                 </td>
+                                <td>${task.deadlineDone}</td>
                             </tr>
                             `;
         }
 
         function changeIsDone(checkbox, index) {
+            let date = new Date().toLocaleDateString()
             tasks[index].isDone = checkbox.checked;
+            if (tasks[index].deadlineDone == '') tasks[index].deadlineDone = date;
+            else tasks[index].deadlineDone = '';
             show();
         }
 
@@ -121,11 +139,14 @@
         function updateTask(index) {
             const id1 = `editDescription${index}`;
             const id2 = `editPerson${index}`;
+            const id3 = `editDeadline${index}`;
             const descriptionInput = document.getElementById(id1);
             const personInput = document.getElementById(id2);
+            const deadlineInput = document.getElementById(id3);
             const task = tasks[index];
             task.description = descriptionInput.value;
             task.person = personInput.value;
+            task.deadline = deadlineInput.value;
             task.editMode = false;
             show();
         }
