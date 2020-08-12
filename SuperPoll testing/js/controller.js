@@ -1,25 +1,27 @@
 
 function addAlternative(text) {
-    document.getElementById('list').innerHTML += `<li>${text}</li>`
+    model.inputs.createPoll.options.push(text)
 }
 
-
-function addAlternative2() {
-    for (i = 0; i < model.polls[0].options.length; i++)
+function showOptionsInCreate() {
+    let html = '';
+    for (option of model.inputs.createPoll.options)
     {
-        document.getElementById('list').innerHTML += `<button>${model.inputs.createPoll.options[i]}</button> <br><br>`
+        html += `<li>${option}</li> <br>`
     }
+    return html
+}
+
+function showOptionsInVote() {
+    const pageInputs = model.polls[model.polls[0].id].options;
+    return pageInputs.map(option => `<li>${option}</li>`).join('');
 }
 
 
-function createAlternativesHtml() {
-    for (i = 0; i < model.polls[0].options.length; i++)
-    {
-        document.getElementById('buttons').innerHTML += `<button>${model.polls[0].options[i]}</button> <br><br>`
-    }
-}
 
-function createAlternativesHtml2() {
-    const pageInputs = model.inputs.createPoll;
-    return pageInputs.options.map(option => `<li>${option}</li>`).join('');
-}
+// function addAlternative2() {
+//     for (i = 0; i < model.inputs.createPoll.options.length; i++)
+//     {
+//         document.getElementById('list').innerHTML += `<button>${model.inputs.createPoll.options[i]}</button> <br><br>`
+//     }
+// }
