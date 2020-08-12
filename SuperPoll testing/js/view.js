@@ -1,14 +1,12 @@
-function createPoll()
-{
+function createPoll() {
     const pageInputs = model.inputs.createPoll;
-    
+
     contentDiv.innerHTML = ` 
     <div>Spørsmål</div>
     <input id='textInput' placeholder='Skriv inn spørsmål...' value='' oninput='model.inputs.createPoll.question=this.value'></input>
     <br><br>
     <input type='checkbox' id='cBox'></input>
     <p>La brukerene legge til egne alternativer</p>
-    
     <ul id="list">
     ${showOptionsInCreate()}
     </ul>
@@ -18,21 +16,25 @@ function createPoll()
     <br><br>
     <button onclick=''>Lag</button>
     `;
-    
+
 }
 
-function showPoll()
-{
+function showPoll() {
     contentDiv.innerHTML = `
     <div>${model.polls[0].question}</div>
     <br>
     ${showOptionsInVote()}
+    <br>
     <div id='buttons'></div>
     <input placeholder='Skriv inn alternativ...' oninput=' value=''></input>
     <button onlick="">Legg til alternativ</button>
     `;
-    // createAlternativesHtml()
-
 }
 
-// oninput='model.inputs.createPoll.newAlternative=this.value'
+function showAllPolls() {
+    contentDiv.innerHTML = `
+    <br>
+    ${showStoredPolls()}
+    `;
+
+}

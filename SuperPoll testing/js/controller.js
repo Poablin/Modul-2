@@ -5,8 +5,7 @@ function addAlternative(text) {
 
 function showOptionsInCreate() {
     let html = '';
-    for (option of model.inputs.createPoll.options)
-    {
+    for (option of model.inputs.createPoll.options) {
         html += `<li>${option}</li> <br>`
     }
     return html
@@ -15,6 +14,14 @@ function showOptionsInCreate() {
 function showOptionsInVote() {
     const pageInputs = model.polls[model.polls[0].id].options;
     return pageInputs.map(option => `<li>${option}</li>`).join('');
+}
+
+function showStoredPolls() {
+    let html = '';
+    for (i = 0; i < model.polls.length; i++) {
+        html += `<button>${model.polls[i].question}</button> <br>`
+    }
+    return html
 }
 
 

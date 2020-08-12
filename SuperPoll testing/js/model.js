@@ -32,6 +32,7 @@ const model = {
             per: 'Terje',
             pål: 'Terje',
             espen: 'Geir',
-        }
-    }, ]
+               }
+           }, 
+    ]
 };
