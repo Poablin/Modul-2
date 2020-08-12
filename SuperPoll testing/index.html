@@ -1,17 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
-    <title>Index</title>
+    <title>Test</title>
 </head>
+
 <body>
-    <h2>Home</h2>
-    <div>Div 1</div>
+    <div>
+        Meny:
+        <a href="javascript:changePage('createPoll')">Lag poll</a>
+        <a href="javascript:changePage('showPoll')">Stem</a>
+        <a href="javascript:changePage('createPoll')">Vis alle polls </a>
+        
+    </div>
+    <div id="app"></div>
     <script src="js/model.js"></script>
     <script src="js/view.js"></script>
     <script src="js/controller.js"></script>
-    <script src="js/javascript.js"></script>
+    <script>
+
+        updateView();
+
+        function updateView() {
+            const page = model.app.currentPage;
+            if (page === 'createPoll') createPoll();
+            else if (page === 'showPoll') showPoll();
+        }
+
+        function changePage(page) {
+            model.app.currentPage = page;
+            updateView();
+        }
+    </script>
 </body>
+
 </html>
