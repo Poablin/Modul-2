@@ -2,20 +2,24 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Home</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/style.css">
-    <title>Test</title>
+    <script src="https://kit.fontawesome.com/1e3bbfe500.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
+    <hr class="hrTop">
     <div>
         Meny:
-        <a href="javascript:changePage('createPoll')">Lag poll</a>
-        <a href="javascript:changePage('showPoll')">Stem</a>
-        <a href="javascript:changePage('showAllPolls')">Vis lagrede polls </a>
-        
+        <button><a href="javascript:changePage('createPoll')">Lag poll</a></button>
+        <button><a href="javascript:changePage('showPoll')">Stem</a></button>
+        <button><a href="javascript:changePage('showAllPolls')">Vis lagrede polls</a></button>
     </div>
+    <hr>
     <div id="app"></div>
     <script src="js/model.js"></script>
     <script src="js/view.js"></script>

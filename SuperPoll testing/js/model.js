@@ -1,4 +1,4 @@
-let contentDiv = document.getElementById('mainContent');
+let contentDiv = document.getElementById('app');
 
 const model = {
     app: {
