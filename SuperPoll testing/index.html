@@ -2,37 +2,32 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Home</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="css/style.css">
-    <script src="https://kit.fontawesome.com/1e3bbfe500.js" crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Superpoll</title>
+    <script src="js/model.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/createPollPageView.js"></script>
+    <script src="js/createPollPageController.js"></script>
+    <script src="js/votePageView.js"></script>
+    <script src="js/votePageController.js"></script>
 </head>
 
 <body>
-    <hr class="hrTop">
     <div>
         Meny:
-        <button><a href="javascript:changePage('createPoll')">Lag poll</a></button>
-        <button><a href="javascript:changePage('showPoll')">Stem</a></button>
-        <button><a href="javascript:changePage('showAllPolls')">Vis lagrede polls</a></button>
+        <a href="javascript:changePage('vote')">stem</a>
+        <a href="javascript:changePage('createVote')">lag poll</a>
     </div>
-    <hr>
     <div id="app"></div>
-    <script src="js/model.js"></script>
-    <script src="js/view.js"></script>
-    <script src="js/controller.js"></script>
-    <script>
 
+    <script>
         updateView();
 
         function updateView() {
             const page = model.app.currentPage;
-            if (page === 'createPoll') createPoll();
-            else if (page === 'showPoll') showPoll();
-            else if (page === 'showAllPolls') showAllPolls();
+            if (page === 'createPoll') updateViewCreateVotePage();
+            else if (page === 'vote') updateViewVotePage();
         }
 
         function changePage(page) {
