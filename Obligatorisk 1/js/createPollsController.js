@@ -10,12 +10,13 @@ function removeAlternative(id) {
 }
 
 function updatePoll() {
-    model.polls[0].options = model.inputs.createPoll.options;
-    model.polls[0].usersCanAddAlternatives = model.inputs.createPoll.usersCanAddAlternatives;
+    model.polls[model.app.chosenPoll].options = model.inputs.createPoll.options;
+    model.polls[model.app.chosenPoll].usersCanAddAlternatives = model.inputs.createPoll.usersCanAddAlternatives;
     showPoll()
 }
 
 function showOptionsInCreate() {
+
     let html = '';
     let i = 0;
     for (option of model.inputs.createPoll.options) {
