@@ -1,0 +1,33 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Test Suite</title>
+    <link rel="stylesheet" href="https://code.jquery.com/qunit/qunit-2.10.1.css">
+</head>
+
+<body>
+    <div id="qunit"></div>
+    <div id="qunit-fixture"></div>
+    <script src="https://code.jquery.com/qunit/qunit-2.10.1.js"></script>
+    <script src="js/model.js"></script>
+    <script src="js/showAllPollsController.js"></script>
+    <script>
+        function showAllPolls() { }
+        function showPoll() { }
+
+        QUnit.test("Velger en ny poll om knappen blir trykka på", function (assert) {
+            selectPoll(1)
+            assert.equal(model.app.chosenPoll, 1, 'Den velger ny poll')
+        });
+        
+        QUnit.test("Det valgte poll sitt innhold blir flytta til createPoll", function (assert) {
+            selectPoll(0)
+            selectPoll(1)
+            assert.equal(model.inputs.createPoll.options, model.polls[1].options,'Innholdet blir bytta')
+        });
+    </script>
+</body>
+
+</html>
