@@ -5,7 +5,7 @@ const model = {
         currentPoll: 1,
         loggedInUser: 'per',
         currentPage: 'createPoll',
-        chosenPoll: 1,
+        chosenPoll: 0,
     },
     users: [
         { username: 'per', name: 'Per', password: '123' },

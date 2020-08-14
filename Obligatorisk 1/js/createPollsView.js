@@ -6,7 +6,7 @@ function createPoll()
     // const newText = model.inputs.createPoll.newAlternative=this.value;
     contentDiv.innerHTML = ` 
     <div class='header'>Spørsmål</div>
-    <input id='textInput' type='text' placeholder='Skriv inn spørsmål...' value='${pageInputs.question}' oninput='model.inputs.createPoll.question=this.value'></input>
+    <input id='textInput' type='text' placeholder='Skriv inn spørsmål...' value='${model.polls[model.app.chosenPoll].question}' oninput='model.inputs.createPoll.question=this.value'></input>
     <br><br>
     <input type='checkbox' id='cBox' ${checked} onchange="model.inputs.usersCanAddAlternatives=this.checked==='checked';checkUsersAdd()"></input>
     La brukerene legge til egne alternativer

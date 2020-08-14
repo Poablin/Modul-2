@@ -1,18 +1,13 @@
-function addAlternative(text) {
-    model.inputs.createPoll.options.push(text)
-    createPoll()
-}
-
 function removeAlternative(id) {
     model.inputs.createPoll.options.splice(id, 1)
     document.getElementById(id).innerHTML = '';
     createPoll()
 }
 
-function updatePoll() {
-    model.polls[model.app.chosenPoll].options = model.inputs.createPoll.options;
-    model.polls[model.app.chosenPoll].usersCanAddAlternatives = model.inputs.createPoll.usersCanAddAlternatives;
-    showPoll()
+function addAlternative(text) {
+    model.inputs.createPoll.options.push(text)
+    createPoll()
+    model.inputs.createPoll.newAlternative = '';
 }
 
 function showOptionsInCreate() {
