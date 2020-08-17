@@ -1,5 +1,4 @@
-function createPoll()
-{
+function createPoll() {
     const buttonText = 'Oppdater';
     const pageInputs = model.inputs.createPoll;
     const checked = pageInputs.usersCanAddAlternatives ? 'checked' : '';
