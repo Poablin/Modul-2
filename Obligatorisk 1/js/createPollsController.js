@@ -15,13 +15,3 @@ function updatePoll() {
     model.polls[model.app.chosenPoll].usersCanAddAlternatives = model.inputs.createPoll.usersCanAddAlternatives;
     showPoll()
 }
-
-function showOptionsInCreate() {
-    let html = '';
-    let i = 0;
-    for (option of model.inputs.createPoll.options) {
-        html += `<li id="${i}">${option} <button class="far fa-times-circle" onclick="removeAlternative(${i})"></button> </li> <br>`
-        i++
-    }
-    return html
-}
