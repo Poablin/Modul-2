@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <script src="https://kit.fontawesome.com/1e3bbfe500.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3"></script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div id='app'></div>
+
+
+<script src="js/model.js"></script>
+<script src="js/common.js"></script>
+<script src="js/productView.js"></script>
+<script src="js/productController.js"></script>
+<script src="js/homeView.js"></script>
+<script src="js/homeController.js"></script>
+<script src="js/basketView.js"></script>
+<script src="js/basketController.js"></script>
+<script src="js/howToView.js"></script>
+<script src="js/accountView.js"></script>
+<script src="js/accountController.js"></script>
+<script src="js/loginView.js"></script>
+<script src="js/loginController.js"></script>
+<script src="js/adminView.js"></script>
+<script src="js/adminController.js"></script>
+<script src="js/errorView.js"></script>
+
+<script>
+let appDiv = document.getElementById('app');
+const pageToFunctionMap = {
+  a:showA,
+  b:showB,
+  c:showC,
+  d:showD,
+  f:showF,
+  g:showG,
+  h:showH,
+}
+
+window.onpopstate = function () {
+  const page = location.hash.substring(1);
+
+  let func = pageToFunctionMap[page];
+    if (func) {
+        func(false);
+    } else (showA)
+}
+
+showA()
+
+function showA(addToHistory = true) {
+  if (addToHistory && location.hash.substring(1) != 'a') addHistory('a');
+  model.currentPage = 'Home';
+  showHome();
+}
+
+function showB(addToHistory = true) {
+  if (addToHistory && location.hash.substring(1) != 'b') addHistory('b');
+  model.currentPage = 'Basket';
+  showBasket();
+}
+
+function showC(addToHistory = true) {
+  if (model.currentUserId === null) return showH()
+  if (model.users[searchUserIndex(model.currentUserId)].isAdmin != true) return showH()
+  if (addToHistory && location.hash.substring(1) != 'c') addHistory('c');
+  model.currentPage = 'Admin';
+  showAdmin();
+}
+
+function showD(addToHistory = true) {
+  if (addToHistory && location.hash.substring(1) != 'd') addHistory('d');
+  model.currentPage = 'How';
+  showHowTo();
+}
+
+function showF(addToHistory = true) {
+  if (model.currentUserId === null) return showH()
+  if (addToHistory && location.hash.substring(1) != 'f') addHistory('f');
+  model.currentPage = 'Account';
+  showAccount();
+}
+
+function showG(addToHistory = true) {
+  if (model.currentUserId != null) return showH()
+  if (addToHistory && location.hash.substring(1) != 'g') addHistory('g');
+  model.currentPage = 'Login';
+  showLogin();
+}
+
+function showH(addToHistory = true) {
+  if (addToHistory && location.hash.substring(1) != 'h') addHistory('h');
+  model.currentPage = 'Error';
+  showError();
+}
+
+function addHistory(page) {
+  history.pushState(null, null, `#${page}`)
+}
+</script>
+
+</body>
+</html>
